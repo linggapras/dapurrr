@@ -1,0 +1,95 @@
+/* style.css content */
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(45deg, #fdfcfb, #e2d1c3);
+  color: #3e2723;
+}
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #fff8e1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+h1 {
+  font-size: 2.5rem;
+  color: #bf360c;
+}
+p.slogan {
+  color: #6d4c41;
+  margin-top: 0.3rem;
+}
+section {
+  max-width: 960px;
+  margin: 1rem auto;
+  background: #fff3e0;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+select, input[type='file'], textarea, input[type='text'] {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+button {
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background: #ff7043;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.recipe-card {
+  background: #ffe0b2;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px #bbb;
+  position: relative;
+}
+.recipe-card h3 {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nutrition-preview {
+  margin-top: 1rem;
+  background: #ffecb3;
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 0.5rem;
+}
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #795548;
+}
+@media screen and (min-width: 768px) {
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}

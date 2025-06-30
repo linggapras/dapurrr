@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DapurKreasi</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" type="image/png" />
+  <meta name="theme-color" content="#ff7043" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🍳 DapurKreasi</h1>
+    <p class="slogan">Kreasikan masakan dari dapurmu, dengan mudah!</p>
+  </header>
+
+  <section>
+    <h2>1. Pilih Bahan Utama 🥦</h2>
+    <select id="ingredientSelect" onchange="generateRecipes()"></select>
+  </section>
+
+  <section>
+    <h2>2. Rekomendasi Resep 🍲</h2>
+    <div id="recipeResults"></div>
+  </section>
+
+  <section>
+    <h2>3. Info Kandungan Gizi 🧪</h2>
+    <div id="nutritionResult" class="nutrition-preview">Pilih bahan untuk melihat info gizi.</div>
+  </section>
+
+  <section>
+    <h2>4. Upload Resep Buatanmu ✍️</h2>
+    <input type="text" id="userRecipeName" placeholder="Nama resep" />
+    <textarea id="userRecipeSteps" placeholder="Langkah-langkah resep" rows="4"></textarea>
+    <input type="text" id="userRecipeIngredient" placeholder="Bahan utama (contoh: jagung)" />
+    <input type="text" id="userRecipeNutrition" placeholder="Nilai gizi bahan utama" />
+    <button onclick="saveUserRecipe()">Simpan Resep</button>
+    <div id="userRecipes"></div>
+  </section>
+
+  <footer>
+    <p>DapurKreasi © 2025 - Siap online & offline 🌐</p>
+    <section>
+      <button id="installButton" style="display: none;">Pasang Aplikasi</button>
+    </section>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    let deferredPrompt;
+    const installButton = document.getElementById('installButton');
+
+    // Tampilkan tombol instal jika PWA dapat diinstal
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Mencegah mini-infobar muncul di perangkat seluler
+      e.preventDefault();
+      // Simpan event agar dapat dipicu nanti.
+      deferredPrompt = e;
+      // Perbarui UI untuk memberi tahu pengguna bahwa mereka dapat menginstal PWA
+      installButton.style.display = 'block';
+    });
+
+    installButton.addEventListener('click', (e) => {
+      // Sembunyikan tombol instal
+      installButton.style.display = 'none';
+      // Tampilkan prompt instal
+      deferredPrompt.prompt();
+      // Tunggu respons pengguna terhadap prompt
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('Pengguna menerima prompt A2HS');
+        } else {
+          console.log('Pengguna menolak prompt A2HS');
+        }
+        deferredPrompt = null;
+      });
+    });
+
+    // Tangani pendaftaran service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('sw.js')
+          .then(reg => console.log('✅ Service Worker terdaftar:', reg.scope))
+          .catch(err => console.error('❌ Service Worker gagal:', err));
+      });
+    }
+  </script>
+</body>
+</html>
